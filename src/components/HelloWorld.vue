@@ -86,7 +86,7 @@ interface Command {
   describe: string;
 }
 
-type Trump = 'b' | 'r' | '[1-5]' | 'bd[1-5]' | ' rd[1-5]';
+// type Trump = 'b' | 'r' | '[1-5]' | 'bd[1-5]' | ' rd[1-5]';
 
 const objectEmpty = (v: Object) => !!Object.entries(v).length;
 
@@ -251,7 +251,7 @@ const commandArray = computed<Command[]>(() => [
   },
 ]);
 
-const copyTexts = ['/tarot', '/nominate'];
+// const copyTexts = ['/tarot', '/nominate'];
 
 const copy = (text: string) => {
   if (!text) return;
