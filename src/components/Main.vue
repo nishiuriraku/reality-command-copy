@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
     <v-responsive class="align-centerfill-height mx-auto" max-width="900">
-      <h1>Reality コマンドコピー君</h1>
+      <h1>REALITY コマンドコピー君</h1>
 
       <div v-for="[, value] in Object.entries(types)">
         <h2 class="my-4">{{ value }}</h2>
@@ -230,6 +230,12 @@ const commandArray = computed<Command[]>(() => [
     permissions: 'viewer',
     describe: 'トランプをランダムで1枚表示',
   },
+  {
+    type: types.game,
+    command: '/tarot',
+    permissions: 'speaker',
+    describe: 'タロットカードを出す',
+  },
 
   {
     type: types.other,
@@ -254,6 +260,12 @@ const commandArray = computed<Command[]>(() => [
     command: '/world camera reset',
     permissions: 'speaker',
     describe: 'カメラの固定を解除する',
+  },
+  {
+    type: types.other,
+    command: '/world respawn',
+    permissions: 'speaker',
+    describe: 'ワールドの座標を初期位置に戻す',
   },
   {
     type: types.other,
@@ -297,9 +309,13 @@ const commandArray = computed<Command[]>(() => [
     permissions: 'speaker',
     describe: '/uso解除',
   },
+  {
+    type: types.other,
+    command: '/nominate',
+    permissions: 'speaker',
+    describe: '配信者かコラボユーザーの名前をランダムで表示',
+  },
 ]);
-
-// const copyTexts = ['/tarot', '/nominate'];
 
 const copy = (text: string) => {
   if (!text) return;
