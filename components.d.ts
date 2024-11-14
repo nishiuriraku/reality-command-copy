@@ -7,12 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ChooseJanken: typeof import('./src/components/ChooseJanken.vue')['default']
-    ChooseNum: typeof import('./src/components/ChooseNum.vue')['default']
-    copy: typeof import('./src/components/LangChange copy.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    LangChange: typeof import('./src/components/LangChange.vue')['default']
-    LookChange: typeof import('./src/components/LookChange.vue')['default']
+    DiceSelect: typeof import('./src/components/DiceSelect.vue')['default']
+    Main: typeof import('./src/components/Main.vue')['default']
+    SelectItem: typeof import('./src/components/SelectItem.vue')['default']
     TitleChange: typeof import('./src/components/TitleChange.vue')['default']
     YouTubeURL: typeof import('./src/components/YouTubeURL.vue')['default']
   }

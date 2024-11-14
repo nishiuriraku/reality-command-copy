@@ -1,7 +1,7 @@
 <template>
   <v-menu>
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props">番号を選択</v-btn>
+      <v-btn v-bind="props">{{ title }}</v-btn>
     </template>
     <v-list v-model:selected="model">
       <v-list-item
@@ -9,7 +9,7 @@
         :key="index"
         :value="item.value"
       >
-        <v-list-item-title>{{ item.value }}</v-list-item-title>
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -18,13 +18,9 @@
 <script setup lang="ts">
 const model = defineModel();
 
-const items = [
-  { value: '1' },
-  { value: '2' },
-  { value: '3' },
-  { value: '4' },
-  { value: '5' },
-  { value: '6' },
-  { value: '7' },
-];
+type Props = {
+  items: { title: string; value: string }[];
+  title: string;
+};
+const { items, title } = defineProps<Props>();
 </script>

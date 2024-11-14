@@ -6,20 +6,31 @@
       <div v-for="[, value] in Object.entries(types)">
         <h2 class="my-4">{{ value }}</h2>
 
-        <div v-for="v in commandArray.filter((v) => v.type === value)">
+        <div
+          v-for="v in commandArray.filter((v) => v.type === value)"
+          :key="v.command"
+        >
           <v-text-field
             :label="v.describe"
             :model-value="v.command"
             variant="outlined"
-            :prepend-inner-icon="
-              v.permissions === 'speaker'
-                ? 'mdi-account-voice'
-                : 'mdi-comment-account'
-            "
             append-icon="mdi-content-copy"
             @click:append="copy(v.command)"
             readonly
           >
+            <template v-slot:prepend-inner>
+              <v-icon
+                v-if="v.permissions === 'speaker'"
+                icon="mdi-account-voice"
+                v-tooltip:bottom="'枠主のみ使用可能'"
+              ></v-icon>
+              <v-icon
+                v-else
+                icon="mdi-comment-account"
+                v-tooltip:bottom="'視聴者も使用可能'"
+              ></v-icon>
+            </template>
+
             <template v-slot:append-inner>
               <div v-if="v.command.includes('youtube')">
                 <YouTubeURL v-model="youtubeId" />
@@ -28,16 +39,35 @@
                 <TitleChange v-model="title" />
               </div>
               <div v-if="v.command.includes('translate')">
-                <LangChange v-model="lang" />
+                <SelectItem
+                  v-model="lang"
+                  :items="langItems"
+                  title="言語を選択"
+                />
               </div>
               <div v-if="v.command.includes('look')">
-                <ChooseNum v-model="look" />
+                <SelectItem
+                  v-model="look"
+                  :items="numItems"
+                  title="番号を選択"
+                />
               </div>
               <div v-if="v.command.includes('slot')">
-                <ChooseNum v-model="slot" />
+                <SelectItem
+                  v-model="slot"
+                  :items="numItems"
+                  title="番号を選択"
+                />
               </div>
               <div v-if="v.command.includes('janken')">
-                <ChooseJanken v-model="janken" />
+                <SelectItem
+                  v-model="janken"
+                  :items="jankenItems"
+                  title="番号を選択"
+                />
+              </div>
+              <div v-if="v.command.includes('dice')">
+                <DiceSelect v-model="dice" />
               </div>
             </template>
           </v-text-field>
@@ -55,21 +85,39 @@
 //
 import { ref, computed } from 'vue';
 
-import YouTubeURL from './YouTubeURL.vue';
 const youtubeId = ref('');
 
-import TitleChange from './TitleChange.vue';
 const title = ref('');
 
-import LangChange from './LangChange.vue';
 const lang = ref('');
+const langItems = [
+  { title: '日本語', value: 'ja' },
+  { title: '英語', value: 'en' },
+  { title: 'ポルトガル語', value: 'pt' },
+  { title: '中国語', value: 'zh' },
+  { title: 'ロシア語', value: 'ru' },
+  { title: 'ドイツ語', value: 'de' },
+  { title: 'スペイン語', value: 'es' },
+  { title: 'フランス語', value: 'fr' },
+  { title: 'イタリア語', value: 'it' },
+  { title: '翻訳を終了', value: 'off' },
+];
 
-import ChooseNum from './ChooseNum.vue';
 const look = ref('');
 const slot = ref('');
+const numItems = Array.from(Array(7)).map((_, i) => {
+  const n = (i + 1).toString();
+  return { title: n, value: n };
+});
 
-import ChooseJanken from './ChooseJanken.vue';
 const janken = ref('');
+const jankenItems = [
+  { title: 'グー (Rock)', value: 'g' },
+  { title: 'チョキ (Scissor)', value: 'c' },
+  { title: 'パー (Paper)', value: 'p' },
+];
+
+const dice = ref('');
 
 enum types {
   usually = '配信系',
@@ -160,7 +208,7 @@ const commandArray = computed<Command[]>(() => [
   },
   {
     type: types.game,
-    command: '/dice',
+    command: `/dice${dice.value}`,
     permissions: 'viewer',
     describe: 'ダイスを振る',
   },
