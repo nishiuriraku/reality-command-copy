@@ -25,5 +25,5 @@
 <script setup lang="ts">
 //
 const icons = [{ icon: 'mdi-home', link: 'https://nishiuriraku.netlify.app' }];
-const linkToOtherWindow = (url) => window.open(url, '_blank');
+const linkToOtherWindow = (url: string) => window.open(url, '_blank');
 </script>
