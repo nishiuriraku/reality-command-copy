@@ -95,7 +95,7 @@ import { ref } from 'vue';
 const model = defineModel();
 
 const radioValue = [
-  { label: '普通に振る', value: 1 },
+  { label: '普通に振る (1~6)', value: 1 },
   { label: '数字を指定する', value: 2 },
   { label: '個数と面を指定する', value: 3 },
 ];

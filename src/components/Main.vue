@@ -105,7 +105,7 @@ const langItems = [
 
 const look = ref('');
 const slot = ref('');
-const numItems = Array.from(Array(7)).map((_, i) => {
+const numItems = Array.from(Array(10)).map((_, i) => {
   const n = (i + 1).toString();
   return { title: n, value: n };
 });
@@ -172,13 +172,13 @@ const commandArray = computed<Command[]>(() => [
   },
   {
     type: types.avater,
-    command: `/look ${objectEmpty(look.value) ? look.value : '{1-7}'}`,
+    command: `/look ${objectEmpty(look.value) ? look.value : '{1-10}'}`,
     permissions: 'speaker',
     describe: '衣装チェンジ（その場のみ）',
   },
   {
     type: types.avater,
-    command: `/slot ${objectEmpty(slot.value) ? slot.value : '{1-7}'}`,
+    command: `/slot ${objectEmpty(slot.value) ? slot.value : '{1-10}'}`,
     permissions: 'speaker',
     describe: '衣装チェンジ（着替え）',
   },
