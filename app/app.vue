@@ -14,6 +14,7 @@ const ogp = url + 'ogp.png';
 useHead({
   title,
   meta: [{ name: 'description', content: description }],
+  link: [{ rel: 'manifest', href: '/manifest.json' }],
 });
 
 useSeoMeta({
