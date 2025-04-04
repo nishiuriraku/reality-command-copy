@@ -1,10 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+const title = 'REALITY コマンドコピー君';
+const description =
+  '顔出しナシのライブ配信アプリ「REALITY」で使えるコマンドのまとめ。1タップで使いたいコマンドをコピーできるような便利ツールです。';
+const url = 'https://reality-command-copy.netlify.app/';
+const ogp = url + 'ogp.png';
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
   future: {
-    compatibilityVersion: 4
+    compatibilityVersion: 4,
   },
 
   ssr: false,
@@ -48,4 +55,34 @@ export default defineNuxtConfig({
       },
     },
   },
-})
+
+  app: {
+    head: {
+      title,
+      htmlAttrs: {
+        lang: 'ja',
+      },
+      meta: [
+        { name: 'description', content: description },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:url', content: url },
+        { property: 'og:image', content: ogp },
+        { property: 'og:imageWidth', content: '1200' },
+        { property: 'og:imageHeight', content: '630' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:siteName', content: title },
+        { property: 'og:locale', content: 'ja_JP' },
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:creator', content: '@nishiuriraku' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: ogp },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'manifest', href: '/manifest.json' },
+      ],
+    },
+  },
+});
