@@ -3,8 +3,8 @@
 const title = 'REALITY コマンドコピー君';
 const description =
   '顔出しナシのライブ配信アプリ「REALITY」で使えるコマンドのまとめ。1タップで使いたいコマンドをコピーできるような便利ツールです。';
-const url = 'https://reality-command-copy.netlify.app/';
-const ogp = url + 'ogp.png';
+const url = 'https://reality-command-copy.netlify.app';
+const ogp = url + '/ogp.png';
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -78,6 +78,7 @@ export default defineNuxtConfig({
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: description },
         { name: 'twitter:image', content: ogp },
+        { name: 'twitter:domain', content: url },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
